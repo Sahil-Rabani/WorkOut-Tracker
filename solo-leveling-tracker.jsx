@@ -319,18 +319,29 @@ function makeDefaultData() {
 /* Safe storage wrappers */
 async function safeGet(key) {
   try {
-    if (!window.storage) return null;
-    const r = await window.storage.get(key, false);
-    return r ? r.value : null;
+    if (window.storage) {
+      const r = await window.storage.get(key, false);
+      return r ? r.value : null;
+    }
+    if (window.localStorage) {
+      return window.localStorage.getItem(key);
+    }
+    return null;
   } catch {
     return null;
   }
 }
 async function safeSet(key, value) {
   try {
-    if (!window.storage) return false;
-    const r = await window.storage.set(key, value, false);
-    return !!r;
+    if (window.storage) {
+      const r = await window.storage.set(key, value, false);
+      return !!r;
+    }
+    if (window.localStorage) {
+      window.localStorage.setItem(key, value);
+      return true;
+    }
+    return false;
   } catch {
     return false;
   }
