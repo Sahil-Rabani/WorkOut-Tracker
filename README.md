@@ -25,7 +25,7 @@ WorkOut Tracker is designed to make workout logging simple and effective. Whethe
 
 ## 🚀 Live Demo
 
-Visit the application here:
+Visit the application here, It stores you daily data and increase it efficiently:
 
 **https://work-out-tracker-kohl.vercel.app/**
 
