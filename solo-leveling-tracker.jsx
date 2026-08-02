@@ -1544,7 +1544,7 @@ function CalendarTab({ data, calMonth, calYear, setCalMonth, setCalYear, selecte
     setSelectedDay(null);
   };
 
-  const statusColor = { complete: "#22c55e", partial: "#eab308", missed: "#ef4444" };
+  const statusColor = { complete: "#22c55e", partial: "#eab308", missed: "#ef4444", rest: "#0ea5e9" };
   const monthLabel = first.toLocaleDateString(undefined, { month: "long", year: "numeric" });
   const todayStr = todayKey();
   const selected = selectedDay ? data.history[selectedDay] : null;
@@ -1587,6 +1587,7 @@ function CalendarTab({ data, calMonth, calYear, setCalMonth, setCalYear, selecte
           <LegendDot color="#22c55e" label="Complete" />
           <LegendDot color="#eab308" label="Partial" />
           <LegendDot color="#ef4444" label="Missed" />
+          <LegendDot color="#0ea5e9" label="Rest / Sunday" />
         </div>
       </div>
 
@@ -1688,6 +1689,9 @@ function SettingsTab({ data, updateSettings, onExport, onImportClick, onReset })
         <div style={{ marginTop: 10, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <label style={{ marginBottom: 0 }}>Sunday Recovery Day</label>
           <Toggle checked={s.sundayRecoveryEnabled} onChange={(v) => updateSettings({ sundayRecoveryEnabled: v })} />
+        </div>
+        <div style={{ marginTop: 8, fontSize: 11, opacity: 0.7 }}>
+          When enabled, Sundays are treated as automatic rest days and do not break your streak.
         </div>
         <div style={{ marginTop: 10, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <label style={{ marginBottom: 0 }}>Sound Effects</label>
