@@ -190,12 +190,25 @@ const daysBetween = (startStr, endStr) => {
 };
 const clamp = (v, lo, hi) => Math.min(hi ?? Infinity, Math.max(lo ?? -Infinity, v));
 
+function isSundayKey(dateStr) {
+  return new Date(dateStr + "T00:00:00").getDay() === 0;
+}
+
 /* Days used for the daily-target formula, with rest/vacation days excluded
    so progression pauses while paused. */
-function effectiveDays(startDate, restDates, dateStr) {
+function effectiveDays(startDate, restDates, dateStr, sundayRecoveryEnabled) {
   const raw = daysBetween(startDate, dateStr);
   let rested = 0;
   for (const rd of restDates || []) if (rd > startDate && rd <= dateStr) rested++;
+  if (sundayRecoveryEnabled) {
+    const seen = new Set(restDates || []);
+    for (let d = new Date(startDate + "T00:00:00"); d <= new Date(dateStr + "T00:00:00"); d.setDate(d.getDate() + 1)) {
+      if (d.getDay() === 0) {
+        const key = todayKey(d);
+        if (key > startDate && key <= dateStr && !seen.has(key)) rested++;
+      }
+    }
+  }
   return Math.max(raw - rested, 0);
 }
 
@@ -210,7 +223,7 @@ function computeStreakInfo(data, todayStatus) {
     const key = todayKey(d);
     const isToday = key === todayKey();
     let status;
-    if (data.restDates?.includes(key)) status = "rest";
+    if (data.restDates?.includes(key) || (data.settings?.sundayRecoveryEnabled && isSundayKey(key))) status = "rest";
     else if (isToday) status = todayStatus;
     else {
       const h = data.history[key];
@@ -309,6 +322,7 @@ function makeDefaultData() {
       highContrast: false,
       weeklyGoalDays: 5,
       monthlyGoalDays: 20,
+      sundayRecoveryEnabled: true,
       notificationsEnabled: false,
       reminderTimes: [],
     },
@@ -364,7 +378,7 @@ function rollForward(input) {
     if (cur.restDates.includes(closingDay)) {
       cur.history[closingDay] = { status: "rest", totalReps: 0, completedCount: 0, totalCount: 0, xpEarned: 0 };
     } else {
-      const dss = effectiveDays(cur.startDate, cur.restDates, closingDay);
+      const dss = effectiveDays(cur.startDate, cur.restDates, closingDay, cur.settings?.sundayRecoveryEnabled);
       const enabled = cur.exercises.filter((e) => e.enabled);
       let totalReps = 0, completedCount = 0;
       enabled.forEach((e) => {
@@ -516,8 +530,8 @@ export default function App() {
 
   /* ---- derived values ---- */
   const rawDaysSinceStart = data ? daysBetween(data.startDate, todayKey()) : 0;
-  const daysSinceStart = data ? effectiveDays(data.startDate, data.restDates, todayKey()) : 0;
-  const isRestToday = data ? (data.restDates || []).includes(todayKey()) : false;
+  const daysSinceStart = data ? effectiveDays(data.startDate, data.restDates, todayKey(), data.settings?.sundayRecoveryEnabled) : 0;
+  const isRestToday = data ? ((data.restDates || []).includes(todayKey()) || (data.settings?.sundayRecoveryEnabled && isSundayKey(todayKey()))) : false;
   const todayExercises = useMemo(() => (data ? data.exercises.filter((e) => e.enabled) : []), [data]);
   const levelInfo = data ? levelFromXP(data.xp) : levelFromXP(0);
   const rank = data ? getRank(data.xp) : RANKS[0];
@@ -616,7 +630,7 @@ export default function App() {
   const setCompletedValue = useCallback((id, rawValue) => {
     setData((d) => {
       if (!d) return d;
-      const dss = effectiveDays(d.startDate, d.restDates, todayKey());
+      const dss = effectiveDays(d.startDate, d.restDates, todayKey(), d.settings?.sundayRecoveryEnabled);
       let bonusGain = 0;
       let bonusAwardedNow = false;
       let awardedName = null;
@@ -1670,6 +1684,10 @@ function SettingsTab({ data, updateSettings, onExport, onImportClick, onReset })
         <div style={{ marginTop: 10 }}>
           <label>XP Multiplier ({s.xpMultiplier}×)</label>
           <input type="range" min="0.5" max="3" step="0.1" value={s.xpMultiplier} onChange={(e) => updateSettings({ xpMultiplier: Number(e.target.value) })} />
+        </div>
+        <div style={{ marginTop: 10, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <label style={{ marginBottom: 0 }}>Sunday Recovery Day</label>
+          <Toggle checked={s.sundayRecoveryEnabled} onChange={(v) => updateSettings({ sundayRecoveryEnabled: v })} />
         </div>
         <div style={{ marginTop: 10, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <label style={{ marginBottom: 0 }}>Sound Effects</label>
