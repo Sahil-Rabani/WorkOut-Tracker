@@ -196,7 +196,7 @@ function isSundayKey(dateStr) {
 
 /* Days used for the daily-target formula, with rest/vacation days excluded
    so progression pauses while paused. */
-function effectiveDays(startDate, restDates, dateStr, sundayRecoveryEnabled) {
+function effectiveDays(startDate, restDates, dateStr, sundayRecoveryEnabled, history = {}) {
   const raw = daysBetween(startDate, dateStr);
   let rested = 0;
   for (const rd of restDates || []) if (rd > startDate && rd <= dateStr) rested++;
@@ -208,6 +208,9 @@ function effectiveDays(startDate, restDates, dateStr, sundayRecoveryEnabled) {
         if (key > startDate && key <= dateStr && !seen.has(key)) rested++;
       }
     }
+  }
+  for (const [key, entry] of Object.entries(history || {})) {
+    if (key > startDate && key <= dateStr && entry?.status === "missed" && !entry?.recovered) rested++;
   }
   return Math.max(raw - rested, 0);
 }
@@ -272,6 +275,13 @@ function getRank(xp) {
 }
 function nextRank(xp) {
   return RANKS.find((r) => r.min > xp) || null;
+}
+
+function applyMissedDayPenalty(data) {
+  const current = levelFromXP(data.xp).level;
+  if (current <= 1) return;
+  const penalty = xpForLevel(current - 1);
+  data.xp = Math.max(0, data.xp - penalty);
 }
 
 function makeExercise(overrides = {}) {
@@ -375,10 +385,10 @@ function rollForward(input) {
     guard++;
     changed = true;
     const closingDay = cur.lastActiveDate;
-    if (cur.restDates.includes(closingDay)) {
+    if (cur.restDates.includes(closingDay) || (cur.settings?.sundayRecoveryEnabled && isSundayKey(closingDay))) {
       cur.history[closingDay] = { status: "rest", totalReps: 0, completedCount: 0, totalCount: 0, xpEarned: 0 };
     } else {
-      const dss = effectiveDays(cur.startDate, cur.restDates, closingDay, cur.settings?.sundayRecoveryEnabled);
+      const dss = effectiveDays(cur.startDate, cur.restDates, closingDay, cur.settings?.sundayRecoveryEnabled, cur.history);
       const enabled = cur.exercises.filter((e) => e.enabled);
       let totalReps = 0, completedCount = 0;
       enabled.forEach((e) => {
@@ -387,9 +397,15 @@ function rollForward(input) {
         if (target > 0 && (e.completedToday || 0) >= target) completedCount++;
       });
       const totalCount = enabled.length;
-      const status = totalCount > 0 && completedCount === totalCount ? "complete" : totalReps > 0 ? "partial" : "missed";
-      const xpEarned = enabled.reduce((s, e) => s + (e.xpAwardedToday || 0), 0) + (cur.bonusXPToday || 0);
-      cur.history[closingDay] = { status, totalReps, completedCount, totalCount, xpEarned };
+      let status = totalCount > 0 && completedCount === totalCount ? "complete" : totalReps > 0 ? "partial" : "missed";
+      let xpEarned = enabled.reduce((s, e) => s + (e.xpAwardedToday || 0), 0) + (cur.bonusXPToday || 0);
+      if (status === "missed") {
+        applyMissedDayPenalty(cur);
+        totalReps = 0;
+        completedCount = 0;
+        xpEarned = 0;
+      }
+      cur.history[closingDay] = { status, totalReps, completedCount, totalCount, xpEarned, penaltyApplied: status === "missed" };
     }
     cur.exercises = cur.exercises.map((e) => ({ ...e, completedToday: 0, xpAwardedToday: 0, awarded: false }));
     cur.bonusXPToday = 0;
@@ -530,7 +546,7 @@ export default function App() {
 
   /* ---- derived values ---- */
   const rawDaysSinceStart = data ? daysBetween(data.startDate, todayKey()) : 0;
-  const daysSinceStart = data ? effectiveDays(data.startDate, data.restDates, todayKey(), data.settings?.sundayRecoveryEnabled) : 0;
+  const daysSinceStart = data ? effectiveDays(data.startDate, data.restDates, todayKey(), data.settings?.sundayRecoveryEnabled, data.history) : 0;
   const isRestToday = data ? ((data.restDates || []).includes(todayKey()) || (data.settings?.sundayRecoveryEnabled && isSundayKey(todayKey()))) : false;
   const todayExercises = useMemo(() => (data ? data.exercises.filter((e) => e.enabled) : []), [data]);
   const levelInfo = data ? levelFromXP(data.xp) : levelFromXP(0);
@@ -630,7 +646,7 @@ export default function App() {
   const setCompletedValue = useCallback((id, rawValue) => {
     setData((d) => {
       if (!d) return d;
-      const dss = effectiveDays(d.startDate, d.restDates, todayKey(), d.settings?.sundayRecoveryEnabled);
+      const dss = effectiveDays(d.startDate, d.restDates, todayKey(), d.settings?.sundayRecoveryEnabled, d.history);
       let bonusGain = 0;
       let bonusAwardedNow = false;
       let awardedName = null;
@@ -1600,6 +1616,11 @@ function CalendarTab({ data, calMonth, calYear, setCalMonth, setCalYear, selecte
               <StatRow label="Total Reps" value={selected.totalReps} />
               <StatRow label="XP Earned" value={selected.xpEarned} />
               <StatRow label="Status" value={selected.status} />
+              {selected.status === "missed" && selected.penaltyApplied && (
+                <div style={{ gridColumn: "1 / -1", color: "#f97316", fontSize: 12, fontWeight: 700, marginTop: 8 }}>
+                  Missed workout — level dropped.
+                </div>
+              )}
             </div>
           ) : (
             <div style={{ fontSize: 12, opacity: 0.55 }}>No data recorded for this day.</div>
