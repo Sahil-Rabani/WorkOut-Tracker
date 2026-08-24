@@ -125,16 +125,16 @@ const DEFAULT_EXERCISES = [
   { name: "Saturday - Legs + Full-body Conditioning: Jumping Jacks", emoji: "⭐", category: "Cardio", unit: "seconds", start: 30, increment: 5, min: 0, max: null, notes: "3 sets × 30–45 sec." },
   { name: "Saturday - Legs + Full-body Conditioning: High Knees", emoji: "👟", category: "Cardio", unit: "seconds", start: 30, increment: 5, min: 0, max: null, notes: "3 sets × 30 sec." },
   { name: "Sunday - Recovery: Walking + Stretching", emoji: "🧘", category: "Mobility", unit: "minutes", start: 15, increment: 5, min: 0, max: null, notes: "No hard workout. Walking and light stretching only." },
-  { name: "Cobra Stretch", emoji: "🐍", category: "Mobility", unit: "seconds", start: 30, increment: 5, min: 0, max: null, notes: "Daily mobility warm-up. Hold gently and breathe." },
-  { name: "Cat-Cow", emoji: "🐈", category: "Mobility", unit: "reps", start: 10, increment: 1, min: 0, max: null, notes: "Daily spinal warm-up. Move slowly and controlled." },
-  { name: "Child Pose", emoji: "🧘", category: "Mobility", unit: "seconds", start: 30, increment: 5, min: 0, max: null, notes: "Daily stretch for the lower back and hips." },
-  { name: "Forward Bend", emoji: "🤸", category: "Mobility", unit: "seconds", start: 30, increment: 5, min: 0, max: null, notes: "Daily hamstring and lower-back stretch." },
-  { name: "Hanging", emoji: "🧗", category: "Strength", unit: "seconds", start: 20, increment: 5, min: 0, max: null, notes: "Daily grip and shoulder engagement." },
-  { name: "Pull Ups", emoji: "🏋️", category: "Strength", unit: "reps", start: 3, increment: 1, min: 0, max: null, notes: "Daily pull-up work. Add reps gradually." },
-  { name: "Dead Bug", emoji: "🧠", category: "Core", unit: "reps", start: 10, increment: 1, min: 0, max: null, notes: "Daily core control. Keep your lower back neutral." },
-  { name: "Wall Squats", emoji: "🦵", category: "Legs", unit: "seconds", start: 30, increment: 5, min: 0, max: null, notes: "Daily leg endurance and posture drill." },
-  { name: "Jumping Jack", emoji: "⭐", category: "Cardio", unit: "reps", start: 15, increment: 2, min: 0, max: null, notes: "Daily cardio warm-up. Keep the rhythm steady." },
-  { name: "Plank", emoji: "🧘", category: "Core", unit: "seconds", start: 30, increment: 5, min: 0, max: null, notes: "Daily core stability builder." },
+  { name: "Cobra Stretch", emoji: "🐍", category: "Mobility", unit: "seconds", start: 10, increment: 3, min: 0, max: null, notes: "Daily mobility warm-up. Hold gently and breathe." },
+  { name: "Cat-Cow", emoji: "🐈", category: "Mobility", unit: "reps", start: 5, increment: 2, min: 0, max: null, notes: "Daily spinal warm-up. Move slowly and controlled." },
+  { name: "Child Pose", emoji: "🧘", category: "Mobility", unit: "seconds", start: 10, increment: 3, min: 0, max: null, notes: "Daily stretch for the lower back and hips." },
+  { name: "Forward Bend", emoji: "🤸", category: "Mobility", unit: "seconds", start: 10, increment: 3, min: 0, max: null, notes: "Daily hamstring and lower-back stretch." },
+  { name: "Hanging", emoji: "🧗", category: "Strength", unit: "seconds", start: 10, increment: 3, min: 0, max: null, notes: "Daily grip and shoulder engagement." },
+  { name: "Pull Ups", emoji: "🏋️", category: "Strength", unit: "reps", start: 5, increment: 2, min: 0, max: null, notes: "Daily pull-up work. Add reps gradually." },
+  { name: "Dead Bug", emoji: "🧠", category: "Core", unit: "reps", start: 5, increment: 2, min: 0, max: null, notes: "Daily core control. Keep your lower back neutral." },
+  { name: "Wall Squats", emoji: "🦵", category: "Legs", unit: "seconds", start: 10, increment: 3, min: 0, max: null, notes: "Daily leg endurance and posture drill." },
+  { name: "Jumping Jack", emoji: "⭐", category: "Cardio", unit: "reps", start: 5, increment: 2, min: 0, max: null, notes: "Daily cardio warm-up. Keep the rhythm steady." },
+  { name: "Plank", emoji: "🧘", category: "Core", unit: "seconds", start: 10, increment: 3, min: 0, max: null, notes: "Daily core stability builder." },
 ];
 
 const ACCENTS = [
@@ -192,16 +192,16 @@ const BUILTIN_TEMPLATES = {
     { name: "Saturday - Legs + Conditioning: Mountain Climbers", emoji: "🏔️", category: "Cardio", unit: "seconds", start: 30, increment: 5, notes: "3 sets × 30–40 sec." },
     { name: "Saturday - Legs + Conditioning: Burpees", emoji: "⚡", category: "Cardio", unit: "reps", start: 8, increment: 1, notes: "3 sets × 8–12 reps." },
     { name: "Sunday - Recovery: Walking + Stretching", emoji: "🧘", category: "Mobility", unit: "minutes", start: 15, increment: 5, notes: "Rest day. Walking and light stretching are fine." },
-    { name: "Cobra Stretch", emoji: "🐍", category: "Mobility", unit: "seconds", start: 30, increment: 5, notes: "Daily mobility warm-up. Hold gently and breathe." },
-    { name: "Cat-Cow", emoji: "🐈", category: "Mobility", unit: "reps", start: 10, increment: 1, notes: "Daily spinal warm-up. Move slowly and controlled." },
-    { name: "Child Pose", emoji: "🧘", category: "Mobility", unit: "seconds", start: 30, increment: 5, notes: "Daily stretch for the lower back and hips." },
-    { name: "Forward Bend", emoji: "🤸", category: "Mobility", unit: "seconds", start: 30, increment: 5, notes: "Daily hamstring and lower-back stretch." },
-    { name: "Hanging", emoji: "🧗", category: "Strength", unit: "seconds", start: 20, increment: 5, notes: "Daily grip and shoulder engagement." },
-    { name: "Pull Ups", emoji: "🏋️", category: "Strength", unit: "reps", start: 3, increment: 1, notes: "Daily pull-up work. Add reps gradually." },
-    { name: "Dead Bug", emoji: "🧠", category: "Core", unit: "reps", start: 10, increment: 1, notes: "Daily core control. Keep your lower back neutral." },
-    { name: "Wall Squats", emoji: "🦵", category: "Legs", unit: "seconds", start: 30, increment: 5, notes: "Daily leg endurance and posture drill." },
-    { name: "Jumping Jack", emoji: "⭐", category: "Cardio", unit: "reps", start: 15, increment: 2, notes: "Daily cardio warm-up. Keep the rhythm steady." },
-    { name: "Plank", emoji: "🧘", category: "Core", unit: "seconds", start: 30, increment: 5, notes: "Daily core stability builder." },
+    { name: "Cobra Stretch", emoji: "🐍", category: "Mobility", unit: "seconds", start: 10, increment: 3, notes: "Daily mobility warm-up. Hold gently and breathe." },
+    { name: "Cat-Cow", emoji: "🐈", category: "Mobility", unit: "reps", start: 5, increment: 2, notes: "Daily spinal warm-up. Move slowly and controlled." },
+    { name: "Child Pose", emoji: "🧘", category: "Mobility", unit: "seconds", start: 10, increment: 3, notes: "Daily stretch for the lower back and hips." },
+    { name: "Forward Bend", emoji: "🤸", category: "Mobility", unit: "seconds", start: 10, increment: 3, notes: "Daily hamstring and lower-back stretch." },
+    { name: "Hanging", emoji: "🧗", category: "Strength", unit: "seconds", start: 10, increment: 3, notes: "Daily grip and shoulder engagement." },
+    { name: "Pull Ups", emoji: "🏋️", category: "Strength", unit: "reps", start: 5, increment: 2, notes: "Daily pull-up work. Add reps gradually." },
+    { name: "Dead Bug", emoji: "🧠", category: "Core", unit: "reps", start: 5, increment: 2, notes: "Daily core control. Keep your lower back neutral." },
+    { name: "Wall Squats", emoji: "🦵", category: "Legs", unit: "seconds", start: 10, increment: 3, notes: "Daily leg endurance and posture drill." },
+    { name: "Jumping Jack", emoji: "⭐", category: "Cardio", unit: "reps", start: 5, increment: 2, notes: "Daily cardio warm-up. Keep the rhythm steady." },
+    { name: "Plank", emoji: "🧘", category: "Core", unit: "seconds", start: 10, increment: 3, notes: "Daily core stability builder." },
   ],
   Beginner: [
     { name: "Wall Push-ups", emoji: "🧱", category: "Strength", unit: "reps", start: 8, increment: 1 },
@@ -311,8 +311,14 @@ function computeStreakInfo(data, todayStatus) {
   return { current: run, longest };
 }
 
-function computeTarget(ex, daysSinceStart) {
-  let val = ex.start + ex.increment * Math.max(daysSinceStart, 0);
+function computeTarget(ex, daysSinceStart, dateStr = todayKey()) {
+  const progressionStart = ex.progressionStartDate || todayKey();
+  let occurrences = 0;
+  for (let d = new Date(progressionStart + "T00:00:00"); d <= new Date(dateStr + "T00:00:00"); d.setDate(d.getDate() + 1)) {
+    const key = todayKey(d);
+    if (isExerciseScheduledForDate(ex, key) && !isSundayKey(key)) occurrences++;
+  }
+  let val = ex.start + ex.increment * Math.max(occurrences - 1, 0);
   if (ex.max !== null && ex.max !== undefined && ex.max !== "") val = Math.min(val, ex.max);
   if (ex.min !== null && ex.min !== undefined && ex.min !== "") val = Math.max(val, ex.min);
   const decimals = ["km", "minutes"].includes(ex.unit) ? 2 : 0;
@@ -323,6 +329,15 @@ function computeTarget(ex, daysSinceStart) {
 function fmtVal(v, unit) {
   if (["km", "minutes"].includes(unit)) return Number(v.toFixed(2)).toString();
   return String(Math.round(v));
+}
+
+function getSetCount(daysSinceStart) {
+  return 2 + Math.floor(Math.max(daysSinceStart, 0) / 14);
+}
+
+function formatExerciseNotes(notes, setCount) {
+  if (!notes) return "";
+  return notes.replace(/^\s*\d+(?:\s*[–-]\s*\d+)?\s+sets\b/i, `${setCount} sets`);
 }
 
 const WEEKDAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -359,13 +374,23 @@ function getExerciseScheduleDays(ex) {
 
 function normalizeExerciseSchedule(ex) {
   if (!ex || typeof ex !== "object") return ex;
-  return { ...ex, scheduleDays: getExerciseScheduleDays(ex) };
+  return { ...ex, scheduleDays: getExerciseScheduleDays(ex), progressionStartDate: ex.progressionStartDate || todayKey() };
+}
+
+function applyRoutineProgression(ex) {
+  if (!ex || !["reps", "seconds"].includes(ex.unit)) return ex;
+  return { ...ex, start: ex.unit === "seconds" ? 10 : 5, increment: ex.unit === "seconds" ? 3 : 2 };
 }
 
 function mergeMissingDefaultExercises(currentExercises = [], defaults = []) {
   const seen = new Set((currentExercises || []).map((ex) => String(ex.name || "").trim().toLowerCase()));
   const additions = (defaults || []).filter((ex) => !seen.has(String(ex.name || "").trim().toLowerCase()));
-  return [...(currentExercises || []), ...additions.map((ex) => makeExercise({ ...ex, scheduleDays: getExerciseScheduleDays(ex) }))];
+  const defaultsByName = new Map((defaults || []).map((ex) => [String(ex.name || "").trim().toLowerCase(), ex]));
+  const updated = (currentExercises || []).map((ex) => {
+    const currentDefault = defaultsByName.get(String(ex.name || "").trim().toLowerCase());
+    return currentDefault ? { ...ex, start: currentDefault.start, increment: currentDefault.increment, notes: currentDefault.notes } : ex;
+  });
+  return [...updated, ...additions.map((ex) => makeExercise({ ...ex, scheduleDays: getExerciseScheduleDays(ex) }))];
 }
 
 function isExerciseScheduledForDate(ex, dateStr) {
@@ -423,6 +448,7 @@ function makeExercise(overrides = {}) {
     max: null,
     notes: "",
     scheduleDays: inferScheduleDays(overrides.name || "New Exercise"),
+    progressionStartDate: todayKey(),
     enabled: true,
     favorite: false,
     completedToday: 0,
@@ -463,7 +489,7 @@ function makeDefaultData() {
       notificationsEnabled: false,
       reminderTimes: [],
     },
-    exercises: DEFAULT_EXERCISES.map((e) => makeExercise(e)),
+    exercises: DEFAULT_EXERCISES.map((e) => makeExercise(applyRoutineProgression(e))),
   };
 }
 
@@ -899,7 +925,7 @@ export default function App() {
   /* ---- templates ---- */
   const applyTemplate = (exerciseDefs, mode) => {
     setData((d) => {
-      const fresh = exerciseDefs.map((e) => makeExercise(e));
+      const fresh = exerciseDefs.map((e) => makeExercise(applyRoutineProgression(e)));
       return { ...d, exercises: mode === "replace" ? fresh : [...d.exercises, ...fresh] };
     });
     addToast(mode === "replace" ? "Template applied — exercise list replaced." : "Template exercises added.", "info");
@@ -1428,7 +1454,8 @@ function ExerciseCard({ ex, daysSinceStart, onAdjust, onComplete, compact, manag
               </button>
             </div>
           </div>
-          {ex.notes && <div style={{ fontSize: 11, opacity: 0.5, marginTop: 8, fontStyle: "italic" }}>{ex.notes}</div>}
+          <div style={{ fontSize: 11, opacity: 0.6, marginTop: 8 }}>{getSetCount(daysSinceStart)} sets</div>
+          {ex.notes && <div style={{ fontSize: 11, opacity: 0.5, marginTop: 4, fontStyle: "italic" }}>{formatExerciseNotes(ex.notes, getSetCount(daysSinceStart))}</div>}
         </>
       )}
 
@@ -1847,7 +1874,7 @@ function CalendarTab({ data, calMonth, calYear, setCalMonth, setCalYear, selecte
               {selectedPlanned.map((ex) => (
                 <div key={ex.id} style={{ display: "flex", justifyContent: "space-between", gap: 10, padding: "8px 10px", background: "rgba(255,255,255,0.03)", borderRadius: 10 }}>
                   <span style={{ fontSize: 12 }}>{ex.emoji} {displayExerciseName(ex.name)}</span>
-                  <span style={{ fontSize: 11, opacity: 0.65, whiteSpace: "nowrap" }}>{fmtVal(computeTarget(ex, selectedDss), ex.unit)} {ex.unit}</span>
+                  <span style={{ fontSize: 11, opacity: 0.65, whiteSpace: "nowrap" }}>{fmtVal(computeTarget(ex, selectedDss, selectedDay), ex.unit)} {ex.unit}</span>
                 </div>
               ))}
             </div>
