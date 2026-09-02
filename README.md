@@ -48,7 +48,3 @@ npm run build
 - `index.html` — App entry page
 - `src/main.jsx` — React app bootstrap
 - `solo-leveling-tracker.jsx` — Main app component and logic
-
-## License
-
-This project is provided as-is.
