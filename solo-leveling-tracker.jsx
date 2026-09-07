@@ -246,7 +246,6 @@ const BUILTIN_TEMPLATES = {
 };
 const TEMPLATE_NAMES = Object.keys(BUILTIN_TEMPLATES);
 
-/* =============================== HELPERS ================================ */
 
 const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
 const todayKey = (d = new Date()) => d.toLocaleDateString("en-CA");
