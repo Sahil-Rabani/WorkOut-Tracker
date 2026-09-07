@@ -144,8 +144,6 @@ const ACCENTS = [
   { name: "Rank-S Gold", value: "#f59e0b" },
 ];
 
-/* Built-in exercise templates. Each entry is a list of exercise definitions
-   in the same shape as DEFAULT_EXERCISES. */
 const BUILTIN_TEMPLATES = {
   "Solo Leveling Classic": [
     { name: "Push-ups", emoji: "💪", category: "Strength", unit: "reps", start: 10, increment: 2 },
