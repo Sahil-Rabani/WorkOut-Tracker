@@ -782,7 +782,6 @@ export default function App() {
     // eslint-disable-next-line
   }, [stats?.totalReps, stats?.streak, stats?.level, stats?.completeDays, stats?.perfectMonth, stats?.rank?.name, stats?.xp, stats?.totalWorkouts, stats?.highestTarget]);
 
-  /* ---- level-up watcher ---- */
   useEffect(() => {
     if (!levelInfo) return;
     if (prevLevelRef.current !== null && levelInfo.level > prevLevelRef.current) {
