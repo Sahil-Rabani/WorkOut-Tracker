@@ -283,9 +283,7 @@ function effectiveDays(startDate, restDates, dateStr, sundayRecoveryEnabled, his
   return Math.max(raw - rested, 0);
 }
 
-/* Derives current + longest streak straight from history (+ live today
-   status) rather than an incrementally-stored counter, so missed-day
-   recovery and rest days can change the streak retroactively and correctly. */
+
 function computeStreakInfo(data, todayStatus) {
   const start = new Date(data.startDate + "T00:00:00");
   const end = new Date(todayKey() + "T00:00:00");
