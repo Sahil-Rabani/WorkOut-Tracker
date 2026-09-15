@@ -263,7 +263,7 @@ function isSundayKey(dateStr) {
 }
 
 /* Days used for the daily-target formula, with rest/vacation days excluded
-   so progression pauses while paused. */
+   so progression pauses while. */
 function effectiveDays(startDate, restDates, dateStr, sundayRecoveryEnabled, history = {}) {
   const raw = daysBetween(startDate, dateStr);
   let rested = 0;
