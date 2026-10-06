@@ -262,7 +262,6 @@ function isSundayKey(dateStr) {
   return new Date(dateStr + "T00:00:00").getDay() === 0;
 }
 
-/* daily-target. */
 function effectiveDays(startDate, restDates, dateStr, sundayRecoveryEnabled, history = {}) {
   const raw = daysBetween(startDate, dateStr);
   let rested = 0;
