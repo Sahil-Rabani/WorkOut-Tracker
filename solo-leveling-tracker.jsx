@@ -356,7 +356,7 @@ function getExerciseScheduleDays(ex) {
   const cleaned = ex.scheduleDays.filter((day) => WEEKDAYS.includes(day));
   if (!cleaned.length) return inferred;
 
-  // Stale saved data can contain every weekday for a single exercise.
+  // Stale saved data can contain every weekday for a exercise.
   // When the exercise name already declares a weekday, the name wins.
   const explicitDay = String(ex.name).trim().match(/^(Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday)\s*-/i);
   if (explicitDay) return inferred;
