@@ -14,6 +14,7 @@ import {
 import * as Tone from "tone";
 import Papa from "papaparse";
 
+/* ============================== CONSTANTS ============================== */
 
 const STORAGE_KEY = "solo-leveling-tracker-state-v1";
 
@@ -79,18 +80,18 @@ const DEFAULT_EXERCISES = [
   { name: "Monday - Chest + Triceps + Shoulders: Pike Push-ups", emoji: "🗼", category: "Strength", unit: "reps", start: 8, increment: 1, min: 0, max: null, notes: "3 sets × 8–12 reps. Rest 60–90 sec between sets." },
   { name: "Monday - Chest + Triceps + Shoulders: Dips", emoji: "💪", category: "Strength", unit: "reps", start: 8, increment: 1, min: 0, max: null, notes: "3 sets × 8–15 reps. Rest 60–90 sec between sets." },
   { name: "Monday - Chest + Triceps + Shoulders: Shoulder Taps", emoji: "🤲", category: "Mobility", unit: "reps", start: 12, increment: 2, min: 0, max: null, notes: "3 sets × 12–20 reps. Rest 60–90 sec between sets." },
-  { name: "Monday - Chest + Triceps + Shoulders: Overhead Backpack Triceps Extension", emoji: "💪", category: "Strength", unit: "reps", start: 10, increment: 1, min: 0, max: null, notes: "3 sets × 10–15 reps. Rest 60–90 sec between sets." },
-  { name: "Tuesday - Back + Biceps + Core: Backpack Rows", emoji: "🏋️", category: "Strength", unit: "reps", start: 10, increment: 1, min: 0, max: null, notes: "4 sets × 10–15 reps." },
-  { name: "Tuesday - Back + Biceps + Core: One-arm Backpack Rows", emoji: "🏋️", category: "Strength", unit: "reps", start: 10, increment: 1, min: 0, max: null, notes: "3 sets × 10–15/side." },
+  { name: "Monday - Chest + Triceps + Shoulders: Dumbbell Overhead Triceps Extension", emoji: "💪", category: "Strength", unit: "reps", start: 10, increment: 1, min: 0, max: null, notes: "3 sets × 10–15 reps. Rest 60–90 sec between sets." },
+  { name: "Tuesday - Back + Biceps + Core: Dumbbell Rows", emoji: "🏋️", category: "Strength", unit: "reps", start: 10, increment: 1, min: 0, max: null, notes: "4 sets × 10–15 reps." },
+  { name: "Tuesday - Back + Biceps + Core: One-arm Dumbbell Rows", emoji: "🏋️", category: "Strength", unit: "reps", start: 10, increment: 1, min: 0, max: null, notes: "3 sets × 10–15/side." },
   { name: "Tuesday - Back + Biceps + Core: Reverse Snow Angels", emoji: "🦴", category: "Mobility", unit: "reps", start: 12, increment: 1, min: 0, max: null, notes: "3 sets × 12–15 reps." },
   { name: "Tuesday - Back + Biceps + Core: Prone Y-T-W Raises", emoji: "🦴", category: "Mobility", unit: "reps", start: 8, increment: 1, min: 0, max: null, notes: "3 sets × 8–12 each." },
-  { name: "Tuesday - Back + Biceps + Core: Backpack Biceps Curls", emoji: "💪", category: "Strength", unit: "reps", start: 10, increment: 1, min: 0, max: null, notes: "3 sets × 10–15 reps." },
-  { name: "Tuesday - Back + Biceps + Core: Hammer Curls with Bottles", emoji: "💪", category: "Strength", unit: "reps", start: 10, increment: 1, min: 0, max: null, notes: "3 sets × 10–15 reps." },
+  { name: "Tuesday - Back + Biceps + Core: Dumbbell Biceps Curls", emoji: "💪", category: "Strength", unit: "reps", start: 10, increment: 1, min: 0, max: null, notes: "3 sets × 10–15 reps." },
+  { name: "Tuesday - Back + Biceps + Core: Hammer Curls with Dumbbells", emoji: "💪", category: "Strength", unit: "reps", start: 10, increment: 1, min: 0, max: null, notes: "3 sets × 10–15 reps." },
   { name: "Tuesday - Back + Biceps + Core: Dead Bug", emoji: "🧠", category: "Core", unit: "reps", start: 10, increment: 1, min: 0, max: null, notes: "3 sets × 10–15/side." },
   { name: "Tuesday - Back + Biceps + Core: Plank", emoji: "🧘", category: "Core", unit: "seconds", start: 30, increment: 5, min: 0, max: null, notes: "3 sets × 30–60 sec." },
-  { name: "Wednesday - Legs + Glutes: Backpack Squats", emoji: "🦵", category: "Legs", unit: "reps", start: 10, increment: 1, min: 0, max: null, notes: "4 sets × 10–15 reps." },
+  { name: "Wednesday - Legs + Glutes: Goblet Squats", emoji: "🦵", category: "Legs", unit: "reps", start: 10, increment: 1, min: 0, max: null, notes: "4 sets × 10–15 reps." },
   { name: "Wednesday - Legs + Glutes: Bulgarian Split Squats", emoji: "🦿", category: "Legs", unit: "reps", start: 8, increment: 1, min: 0, max: null, notes: "3 sets × 8–12/leg." },
-  { name: "Wednesday - Legs + Glutes: Romanian Deadlifts with Backpack", emoji: "🦵", category: "Legs", unit: "reps", start: 10, increment: 1, min: 0, max: null, notes: "3 sets × 10–15 reps." },
+  { name: "Wednesday - Legs + Glutes: Dumbbell Romanian Deadlift", emoji: "🦵", category: "Legs", unit: "reps", start: 10, increment: 1, min: 0, max: null, notes: "3 sets × 10–15 reps." },
   { name: "Wednesday - Legs + Glutes: Walking Lunges", emoji: "🦿", category: "Legs", unit: "reps", start: 10, increment: 1, min: 0, max: null, notes: "3 sets × 10–15/leg." },
   { name: "Wednesday - Legs + Glutes: Hip Thrusts", emoji: "🦿", category: "Legs", unit: "reps", start: 10, increment: 1, min: 0, max: null, notes: "3 sets × 10–20 reps." },
   { name: "Wednesday - Legs + Glutes: Single-leg Glute Bridges", emoji: "🦿", category: "Legs", unit: "reps", start: 10, increment: 1, min: 0, max: null, notes: "3 sets × 10–15/leg." },
@@ -104,8 +105,8 @@ const DEFAULT_EXERCISES = [
   { name: "Thursday - Chest + Shoulders + Triceps: Lateral Raises with Bottles", emoji: "🤲", category: "Mobility", unit: "reps", start: 12, increment: 2, min: 0, max: null, notes: "3 sets × 12–20 reps." },
   { name: "Thursday - Chest + Shoulders + Triceps: Rear-delt Raises", emoji: "🤲", category: "Mobility", unit: "reps", start: 12, increment: 2, min: 0, max: null, notes: "3 sets × 12–20 reps." },
   { name: "Thursday - Chest + Shoulders + Triceps: Bench/Chair Dips", emoji: "💪", category: "Strength", unit: "reps", start: 8, increment: 1, min: 0, max: null, notes: "2–3 sets × 8–15 reps. Skip if chair is unstable." },
-  { name: "Friday - Back + Biceps + Core: Backpack Rows", emoji: "🏋️", category: "Strength", unit: "reps", start: 10, increment: 1, min: 0, max: null, notes: "4 sets × 10–15 reps." },
-  { name: "Friday - Back + Biceps + Core: One-arm Backpack Rows", emoji: "🏋️", category: "Strength", unit: "reps", start: 8, increment: 1, min: 0, max: null, notes: "3 sets × 8–15/side." },
+  { name: "Friday - Back + Biceps + Core: Dumbbell Rows", emoji: "🏋️", category: "Strength", unit: "reps", start: 10, increment: 1, min: 0, max: null, notes: "4 sets × 10–15 reps." },
+  { name: "Friday - Back + Biceps + Core: One-arm Dumbbell Rows", emoji: "🏋️", category: "Strength", unit: "reps", start: 8, increment: 1, min: 0, max: null, notes: "3 sets × 8–15/side." },
   { name: "Friday - Back + Biceps + Core: Superman", emoji: "🦴", category: "Mobility", unit: "reps", start: 12, increment: 1, min: 0, max: null, notes: "3 sets × 12–15 reps." },
   { name: "Friday - Back + Biceps + Core: Superman Pulls", emoji: "🦴", category: "Mobility", unit: "reps", start: 10, increment: 1, min: 0, max: null, notes: "3 sets × 10–15 reps." },
   { name: "Friday - Back + Biceps + Core: Concentration Curls", emoji: "💪", category: "Strength", unit: "reps", start: 10, increment: 1, min: 0, max: null, notes: "3 sets × 10–15/arm." },
@@ -144,6 +145,8 @@ const ACCENTS = [
   { name: "Rank-S Gold", value: "#f59e0b" },
 ];
 
+/* Built-in exercise templates. Each entry is a list of exercise definitions
+   in the same shape as DEFAULT_EXERCISES. */
 const BUILTIN_TEMPLATES = {
   "Solo Leveling Classic": [
     { name: "Push-ups", emoji: "💪", category: "Strength", unit: "reps", start: 10, increment: 2 },
@@ -158,25 +161,25 @@ const BUILTIN_TEMPLATES = {
     { name: "Monday - Chest + Triceps + Shoulders: Pike Push-ups", emoji: "🗼", category: "Strength", unit: "reps", start: 8, increment: 1, notes: "3 sets × 8–12 reps." },
     { name: "Monday - Chest + Triceps + Shoulders: Dips", emoji: "💪", category: "Strength", unit: "reps", start: 8, increment: 1, notes: "3 sets × 8–15 reps." },
     { name: "Monday - Chest + Triceps + Shoulders: Shoulder Taps", emoji: "🤲", category: "Mobility", unit: "reps", start: 12, increment: 2, notes: "3 sets × 12–20 reps." },
-    { name: "Monday - Chest + Triceps + Shoulders: Overhead Backpack Triceps Extension", emoji: "💪", category: "Strength", unit: "reps", start: 10, increment: 1, notes: "3 sets × 10–15 reps." },
-    { name: "Tuesday - Back + Biceps + Core: Backpack Rows", emoji: "🏋️", category: "Strength", unit: "reps", start: 10, increment: 1, notes: "4 sets × 10–15 reps." },
-    { name: "Tuesday - Back + Biceps + Core: One-arm Backpack Rows", emoji: "🏋️", category: "Strength", unit: "reps", start: 10, increment: 1, notes: "3 sets × 10–15/side." },
+    { name: "Monday - Chest + Triceps + Shoulders: Dumbbell Overhead Triceps Extension", emoji: "💪", category: "Strength", unit: "reps", start: 10, increment: 1, notes: "3 sets × 10–15 reps." },
+    { name: "Tuesday - Back + Biceps + Core: Dumbbell Rows", emoji: "🏋️", category: "Strength", unit: "reps", start: 10, increment: 1, notes: "4 sets × 10–15 reps." },
+    { name: "Tuesday - Back + Biceps + Core: One-arm Dumbbell Rows", emoji: "🏋️", category: "Strength", unit: "reps", start: 10, increment: 1, notes: "3 sets × 10–15/side." },
     { name: "Tuesday - Back + Biceps + Core: Reverse Snow Angels", emoji: "🦴", category: "Mobility", unit: "reps", start: 12, increment: 1, notes: "3 sets × 12–15 reps." },
     { name: "Tuesday - Back + Biceps + Core: Prone Y-T-W Raises", emoji: "🦴", category: "Mobility", unit: "reps", start: 8, increment: 1, notes: "3 sets × 8–12 each." },
-    { name: "Tuesday - Back + Biceps + Core: Backpack Biceps Curls", emoji: "💪", category: "Strength", unit: "reps", start: 10, increment: 1, notes: "3 sets × 10–15 reps." },
-    { name: "Tuesday - Back + Biceps + Core: Hammer Curls with Bottles", emoji: "💪", category: "Strength", unit: "reps", start: 10, increment: 1, notes: "3 sets × 10–15 reps." },
-    { name: "Wednesday - Legs + Glutes: Backpack Squats", emoji: "🦵", category: "Legs", unit: "reps", start: 10, increment: 1, notes: "4 sets × 10–15 reps." },
+    { name: "Tuesday - Back + Biceps + Core: Dumbbell Biceps Curls", emoji: "💪", category: "Strength", unit: "reps", start: 10, increment: 1, notes: "3 sets × 10–15 reps." },
+    { name: "Tuesday - Back + Biceps + Core: Hammer Curls with Dumbbells", emoji: "💪", category: "Strength", unit: "reps", start: 10, increment: 1, notes: "3 sets × 10–15 reps." },
+    { name: "Wednesday - Legs + Glutes: Goblet Squats", emoji: "🦵", category: "Legs", unit: "reps", start: 10, increment: 1, notes: "4 sets × 10–15 reps." },
     { name: "Wednesday - Legs + Glutes: Bulgarian Split Squats", emoji: "🦿", category: "Legs", unit: "reps", start: 8, increment: 1, notes: "3 sets × 8–12/leg." },
-    { name: "Wednesday - Legs + Glutes: Romanian Deadlifts with Backpack", emoji: "🦵", category: "Legs", unit: "reps", start: 10, increment: 1, notes: "3 sets × 10–15 reps." },
+    { name: "Wednesday - Legs + Glutes: Dumbbell Romanian Deadlift", emoji: "🦵", category: "Legs", unit: "reps", start: 10, increment: 1, notes: "3 sets × 10–15 reps." },
     { name: "Wednesday - Legs + Glutes: Walking Lunges", emoji: "🦿", category: "Legs", unit: "reps", start: 10, increment: 1, notes: "3 sets × 10–15/leg." },
     { name: "Thursday - Chest + Shoulders + Triceps: Wide Push-ups", emoji: "💪", category: "Strength", unit: "reps", start: 10, increment: 1, notes: "3 sets × 10–15 reps." },
     { name: "Thursday - Chest + Shoulders + Triceps: Incline Push-ups", emoji: "💪", category: "Strength", unit: "reps", start: 10, increment: 1, notes: "3 sets × 10–20 reps." },
     { name: "Thursday - Chest + Shoulders + Triceps: Pseudo Planche Push-ups", emoji: "💪", category: "Strength", unit: "reps", start: 5, increment: 1, notes: "3 sets × 5–10 reps." },
     { name: "Thursday - Chest + Shoulders + Triceps: Elevated Pike Push-ups", emoji: "🗼", category: "Strength", unit: "reps", start: 8, increment: 1, notes: "3 sets × 8–12 reps." },
     { name: "Thursday - Chest + Shoulders + Triceps: Close-grip Push-ups", emoji: "💎", category: "Strength", unit: "reps", start: 8, increment: 1, notes: "3 sets × 8–15 reps." },
-    { name: "Thursday - Chest + Shoulders + Triceps: Lateral Raises with Bottles", emoji: "🤲", category: "Mobility", unit: "reps", start: 12, increment: 2, notes: "3 sets × 12–20 reps." },
-    { name: "Friday - Back + Biceps + Core: Backpack Rows", emoji: "🏋️", category: "Strength", unit: "reps", start: 10, increment: 1, notes: "4 sets × 10–15 reps." },
-    { name: "Friday - Back + Biceps + Core: One-arm Backpack Rows", emoji: "🏋️", category: "Strength", unit: "reps", start: 8, increment: 1, notes: "3 sets × 8–15/side." },
+    { name: "Thursday - Chest + Shoulders + Triceps: Lateral Raises with Dumbbells", emoji: "🤲", category: "Mobility", unit: "reps", start: 12, increment: 2, notes: "3 sets × 12–20 reps." },
+    { name: "Friday - Back + Biceps + Core: Dumbbell Rows", emoji: "🏋️", category: "Strength", unit: "reps", start: 10, increment: 1, notes: "4 sets × 10–15 reps." },
+    { name: "Friday - Back + Biceps + Core: One-arm Dumbbell Rows", emoji: "🏋️", category: "Strength", unit: "reps", start: 8, increment: 1, notes: "3 sets × 8–15/side." },
     { name: "Friday - Back + Biceps + Core: Superman", emoji: "🦴", category: "Mobility", unit: "reps", start: 12, increment: 1, notes: "3 sets × 12–15 reps." },
     { name: "Friday - Back + Biceps + Core: Superman Pulls", emoji: "🦴", category: "Mobility", unit: "reps", start: 10, increment: 1, notes: "3 sets × 10–15 reps." },
     { name: "Friday - Back + Biceps + Core: Concentration Curls", emoji: "💪", category: "Strength", unit: "reps", start: 10, increment: 1, notes: "3 sets × 10–15/arm." },
@@ -246,6 +249,7 @@ const BUILTIN_TEMPLATES = {
 };
 const TEMPLATE_NAMES = Object.keys(BUILTIN_TEMPLATES);
 
+/* =============================== HELPERS ================================ */
 
 const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
 const todayKey = (d = new Date()) => d.toLocaleDateString("en-CA");
@@ -262,6 +266,8 @@ function isSundayKey(dateStr) {
   return new Date(dateStr + "T00:00:00").getDay() === 0;
 }
 
+/* Days used for the daily-target formula, with rest/vacation days excluded
+   so progression pauses while paused. */
 function effectiveDays(startDate, restDates, dateStr, sundayRecoveryEnabled, history = {}) {
   const raw = daysBetween(startDate, dateStr);
   let rested = 0;
@@ -281,7 +287,9 @@ function effectiveDays(startDate, restDates, dateStr, sundayRecoveryEnabled, his
   return Math.max(raw - rested, 0);
 }
 
-
+/* Derives current + longest streak straight from history (+ live today
+   status) rather than an incrementally-stored counter, so missed-day
+   recovery and rest days can change the streak retroactively and correctly. */
 function computeStreakInfo(data, todayStatus) {
   const start = new Date(data.startDate + "T00:00:00");
   const end = new Date(todayKey() + "T00:00:00");
@@ -356,7 +364,7 @@ function getExerciseScheduleDays(ex) {
   const cleaned = ex.scheduleDays.filter((day) => WEEKDAYS.includes(day));
   if (!cleaned.length) return inferred;
 
-  // Stale saved data can contain every weekday
+  // Stale saved data can contain every weekday for a single exercise.
   // When the exercise name already declares a weekday, the name wins.
   const explicitDay = String(ex.name).trim().match(/^(Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday)\s*-/i);
   if (explicitDay) return inferred;
@@ -778,6 +786,7 @@ export default function App() {
     // eslint-disable-next-line
   }, [stats?.totalReps, stats?.streak, stats?.level, stats?.completeDays, stats?.perfectMonth, stats?.rank?.name, stats?.xp, stats?.totalWorkouts, stats?.highestTarget]);
 
+  /* ---- level-up watcher ---- */
   useEffect(() => {
     if (!levelInfo) return;
     if (prevLevelRef.current !== null && levelInfo.level > prevLevelRef.current) {
