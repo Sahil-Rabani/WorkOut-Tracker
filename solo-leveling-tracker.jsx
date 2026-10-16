@@ -14,7 +14,7 @@ import {
 import * as Tone from "tone";
 import Papa from "papaparse";
 
-/* ============================== CONSTANTS ============================== */
+/* ============================== CONSTANTS =========================== */
 
 const STORAGE_KEY = "solo-leveling-tracker-state-v1";
 
